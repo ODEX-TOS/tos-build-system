@@ -30,5 +30,5 @@ setup(name='tos-build-system',
       author='Meyers Tom',
       author_email='tom@odex.be',
       url='https://github.com/ODEX-TOS/tos-build-system',
-      packages=['tbs', 'tbs.dependencies', 'tbs.helper', 'tbs.image', 'tbs.kernel', 'tbs.launcher', 'tbs.repo', 'tbs.upload']
+      packages=['tbs', 'tbs.dependencies', 'tbs.helper', 'tbs.image', 'tbs.kernel', 'tbs.launcher', 'tbs.repo', 'tbs.upload', 'tbs.logger']
      )

@@ -70,6 +70,13 @@ If you wish to run unit tests simply do the following.
 python -m unittest discover -s <module>/tests -p "*_test.py"
 ```
 
+You can control the tbs log level using the `TBS_LOG` environment variable
+```sh
+export TBS_LOG="1" # print only errors
+export TBS_LOG="2" # print errors and warnings
+export TBS_LOG="3" # print errors, warnings and debug messages
+```
+
 ## Release History
 
 * 0.0.1
