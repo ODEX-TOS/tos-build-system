@@ -8,6 +8,8 @@ def main(args):
     You can install multiple things by supplying multiple options
     """
     logger.log("Trying to install dependencies with the following settings: {}".format(args))
+    # always perform this install
+    checkInstall(packages.GENERAL_PACKAGES)
     if args.all:
         installAll()
     elif args.repo_full:
