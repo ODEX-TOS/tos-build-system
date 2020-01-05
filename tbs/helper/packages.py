@@ -74,6 +74,10 @@ class Package(IPackage):
 
     # TODO: implement Arch install script
     def Install(self):
+        result = filedescriptor.CMD(['yay',  "-Syu" ,"--noconfirm", self.package]).execute(True)
+        if not result.exitcode == 0:
+            logger.log("Something failed during the package installation procedure", logger.LOG_ERROR)
+            return False
         return self.isInstalled()
 
 
@@ -113,6 +117,10 @@ class Packages(IPackages):
 
     # TODO: implement arch install script
     def Install(self):
+        result = filedescriptor.CMD(['yay',  "-Syu" ,"--noconfirm"] + self.packages).execute(True)
+        if not result.exitcode == 0:
+            logger.log("Something failed during the package installation procedure", logger.LOG_ERROR)
+            return False
         return self.isInstalled()
 
     

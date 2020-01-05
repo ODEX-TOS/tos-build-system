@@ -41,6 +41,7 @@ class CMD(Icmd):
         self.exitcode = 0
     def execute(self, bPrintOutput=False):
         result = subprocess.Popen(self.command, 
+           stdin=subprocess.PIPE,
            stdout=subprocess.PIPE, 
            stderr=subprocess.STDOUT, bufsize=10)
         self.stdout = ""

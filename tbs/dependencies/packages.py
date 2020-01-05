@@ -9,7 +9,7 @@ GENERAL_PACKAGES=["git"]
 REPO_PACKAGES=["python-sphinx", "rust", "cargo", "pacman-contrib", "i3lock-color-git", "dkms", "xorg-xset", "unzip", "asciidoc", "docbook-xsl", "pythonqt" ]
 
 # packages required to build the kernel
-KERNEL_PACKAGES=["asp", "base-devel"]
+KERNEL_PACKAGES=["asp", "autoconf", "automake", "binutils", "bison", "fakeroot", "file", "findutils", "flex", "gawk", "gcc", "gettext", "grep", "groff", "gzip", "libtool", "m4", "make", "pacman", "patch", "pkgconf", "sed", "sudo", "texinfo", "which"]
 
 # packages required to build the iso
 IMAGE_PACKAGES=["archiso"]
