@@ -71,6 +71,7 @@ class Package(IPackage):
         mock.setMockInstalled(packages)
         return mock.isInstalled()
 
+    # TODO: implement Arch install script
     def Install(self):
         return self.isInstalled()
 
@@ -108,6 +109,7 @@ class Packages(IPackages):
         mock.setMockInstalled(packages)
         return mock.isInstalled()
 
+    # TODO: implement arch install script
     def Install(self):
         return self.isInstalled()
 
