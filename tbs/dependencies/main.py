@@ -1,6 +1,10 @@
 import tbs.helper.packages as installer
+import tbs.helper.filedescriptor as fd
 import tbs.dependencies.packages as packages
 import tbs.logger.log as logger
+import tbs.helper.checks as checks
+import os
+
 def main(args):
     """
     This is the main function of the dependency runner
@@ -8,8 +12,7 @@ def main(args):
     You can install multiple things by supplying multiple options
     """
     logger.log("Trying to install dependencies with the following settings: {}".format(args))
-    # always perform this install
-    checkInstall(packages.GENERAL_PACKAGES)
+    installCommon()
     if args.all:
         installAll()
     elif args.repo_full:
@@ -23,6 +26,35 @@ def main(args):
             installUpload()
         if args.repo:
             installRepo()
+
+def installCommon():
+    checkYay()
+    # always perform this install
+    checkInstall(packages.GENERAL_PACKAGES)
+
+def checkYay():
+    """
+    Check if yay is installed
+    If it doesn't exist then try to build it
+    """
+    state = installer.Package("yay")
+    if not state.isInstalled():
+        logger.log("Yay is not installed. We will try to compile it in order to install our aur based packages", logger.LOG_WARM)
+        checks.checkRoot("Installing packages requires root permission")
+        result = fd.CMD(["bash", "-c", 
+        """git clone https://aur.archlinux.org/yay.git
+            cd yay || exit 1
+            makepkg -si
+            cd ../ || exit 1
+            rm -rf yay"""]).execute(True)
+        if not result.exitcode == 0:
+            logger.log("Unexpected error happend when installing yay", logger.LOG_ERROR)
+            raise Exception(result.stderr)
+        else:
+            logger.log("yay has been succesfully installed")
+    else:
+        logger.log("yay has been detected, AUR support is enabled")
+
 
 def checkInstall(payload):
     """

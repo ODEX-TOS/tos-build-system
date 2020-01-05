@@ -3,6 +3,7 @@ This module is used to extract filedescriptors from a given command
 """
 from abc import ABC, abstractmethod 
 import subprocess
+import tbs.logger.log as logger
 
 class Icmd(ABC):
     """
@@ -37,13 +38,18 @@ class CMD(Icmd):
         self.decoder=decoder
         self.stdout = None
         self.stderr = None
-    def execute(self):
+        self.exitcode = 0
+    def execute(self, bPrintOutput=False):
         result = subprocess.Popen(self.command, 
            stdout=subprocess.PIPE, 
-           stderr=subprocess.STDOUT)
-        stdout, stderr = result.communicate()
-        if not stdout == None:
-            self.stdout = stdout.decode(self.decoder)
-        if not stderr == None:
-            self.stderr = stderr.decode(self.decoder)
+           stderr=subprocess.STDOUT, bufsize=10)
+        self.stdout = ""
+        self.stderr = ""
+        with result.stdout:
+            for line in iter(result.stdout.readline, b''): # b'\n'-separated lines
+                line = line.decode(self.decoder)
+                if bPrintOutput:
+                    logger.log(line.replace("\n", ""))
+                self.stdout += line
+        self.exitcode = result.wait()
         return self
