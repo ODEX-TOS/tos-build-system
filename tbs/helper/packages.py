@@ -4,6 +4,7 @@ This file contains helper classes and methods for installing and checking packag
 # used to implement abstract base classes (much like interfaces)
 from abc import ABC, abstractmethod 
 import tbs.helper.filedescriptor as filedescriptor
+import tbs.logger.log as logger
 # interfaces
 class IPackage(ABC):
     def __init__(self, package="base"):
@@ -64,7 +65,7 @@ class Package(IPackage):
         self.package = package
 
     def isInstalled(self):
-        packages = filedescriptor.CMD(['pacman', '-Q']).execute().stdout
+        packages = filedescriptor.CMD(['pacman', '-Q']).execute().stdout.split("\n")
         # strip out version number
         packages = [package.split(" ")[0] for package in packages]
         mock = MockPackage(self.package)
@@ -89,6 +90,7 @@ class MockPackages(IPackages):
     def isInstalled(self):
         for package in self.packages:
             if not package in self.installed:
+                logger.log("Package is not in the installed list: {}, list: {}".format(package, self.installed), logger.LOG_WARM)
                 return False
         return True
 
@@ -102,7 +104,7 @@ class Packages(IPackages):
         self.packages = packages
 
     def isInstalled(self):
-        packages = filedescriptor.CMD(['pacman', '-Q']).execute().stdout
+        packages = filedescriptor.CMD(['pacman', '-Q']).execute().stdout.split("\n")
         # strip out version number
         packages = [package.split(" ")[0] for package in packages]
         mock = MockPackages(self.packages)

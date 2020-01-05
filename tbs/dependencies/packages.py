@@ -15,4 +15,4 @@ KERNEL_PACKAGES=["asp", "base-devel"]
 IMAGE_PACKAGES=["archiso"]
 
 # packages required to sync with a server/cloud instance
-UPLOAD_PACKAGES=["rsync", "gsync"]
+UPLOAD_PACKAGES=["rsync"]
