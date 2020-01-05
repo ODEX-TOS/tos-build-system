@@ -87,7 +87,7 @@ class MockPackages(IPackages):
 
     def isInstalled(self):
         for package in self.packages:
-            if not package in self.packages:
+            if not package in self.installed:
                 return False
         return True
 
@@ -104,7 +104,7 @@ class Packages(IPackages):
         packages = filedescriptor.CMD(['pacman', '-Q']).execute().stdout
         # strip out version number
         packages = [package.split(" ")[0] for package in packages]
-        fmock = MockPackages(self.packages)
+        mock = MockPackages(self.packages)
         mock.setMockInstalled(packages)
         return mock.isInstalled()
 

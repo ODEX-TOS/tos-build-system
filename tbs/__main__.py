@@ -31,6 +31,7 @@ parsers = [
 
 
 parser = argparse.ArgumentParser(prog='tbs')
+
 subparsers = parser.add_subparsers(dest='command')
 for parse in parsers:
     parse(subparsers)
