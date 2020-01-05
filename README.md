@@ -50,7 +50,15 @@ sudo pip install
 
 ## Usage example
 
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
+Our build system has the following branches:
+* dependencies -> install all dependencies for a given tbs task eg building the repo
+* image -> make the tool build an entire tos image
+* kernel -> build the tos kernel with custom settings
+* launcher -> perform a full build, eg building the repo, kernel deployment of said repo and building an image
+* repo -> build the entire repository (or parts of it)
+* upload -> deploy certain parts to the cloud
+
+If you want more information on how to used the `tbs` refer below or to the help page by using `tbs -h`
 
 _For more examples and usage, please refer to the [Documentation](https://github.com/ODEX-TOS/tos-build-system)._
 
