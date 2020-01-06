@@ -23,14 +23,14 @@ def main(args):
         buildFonts()
     elif args.kernel:
         buildKernel()
+    elif args.sync:
+        syncRepo()
     elif args.list:
         listAllPackages()
     elif args.list_fonts:
         listFonts()
     elif args.list_packages:
         listPackages()
-    elif args.sync:
-        syncRepo()
 
 
 def buildBase():
