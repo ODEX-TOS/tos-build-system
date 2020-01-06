@@ -1,4 +1,5 @@
 import tbs.helper.filedescriptor as fd
+import tbs.logger.log as logger
 import os
 def downloadRepo(subpath="toslive"):
     """

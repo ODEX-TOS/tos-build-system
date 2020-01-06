@@ -94,7 +94,7 @@ class MockPackages(IPackages):
     def isInstalled(self):
         for package in self.packages:
             if not package in self.installed:
-                logger.log("Package is not in the installed list: {}, list: {}".format(package, self.installed), logger.LOG_WARM)
+                logger.log("Package is not in the installed list: {}".format(package), logger.LOG_WARM)
                 return False
         return True
 
