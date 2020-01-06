@@ -9,7 +9,6 @@ def main(args):
     This is the main function of the kernel runner
     It will be executed with the arguments suplied if the end user called this.
     """
-    print(args)
     dependency.installCommon()
     dependency.installKernel()
     if not checks.inCorrectDirectory("repo"):
