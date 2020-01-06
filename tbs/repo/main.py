@@ -20,19 +20,21 @@ def main(args):
     logger.log("Build files should be here: {}".format(os.getcwd()))
 
     if args.packages:
-        buildBase()
+        buildBase(args.upload)
     elif args.fonts:
-        buildFonts()
+        buildFonts(args.upload)
     elif args.kernel:
-        buildKernel()
+        buildKernel(args.upload)
     elif args.sync:
-        syncRepo()
+        syncRepo(args.upload)
     elif args.list:
         listAllPackages()
     elif args.list_fonts:
         listFonts()
     elif args.list_packages:
         listPackages()
+    elif args.all:
+        BuildFullRepo(args.upload)
 
 
 def buildBase():
@@ -68,7 +70,7 @@ def syncRepo():
         logger.log("Something went wrong when syncing packages to the repo")
         raise Exception(result.stderr)
 
-def BuildFullRepo():
+def BuildFullRepo(bUpload=True):
     """
     Build the base packages together with the font packages and the tos kernel.
     Afterwards sync the tos repo and upload it all to the cloud
@@ -77,7 +79,9 @@ def BuildFullRepo():
     buildFonts()
     buildKernel()
     syncRepo()
-    upload.main({"all": True}) # upload everything
+    if bUpload:
+        logger.log("Detected upload option after full build.")
+        upload.main({"all": True}) # upload everything
 
 def listFonts():
     """

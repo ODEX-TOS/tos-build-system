@@ -16,4 +16,6 @@ def commands(subparser):
     parser.add_argument('--list-packages', '-lp', help='List all packages that will be build', action='store_true')
     parser.add_argument('--sync', '-s', help='Sync all exisiting repo packages with the repo database', action='store_true')
     parser.add_argument('--all', '-a', help='Generate a full repository', action='store_true')
+    parser.add_argument('--upload', '-u', help='Upload the repo', action='store_true')
+
 
