@@ -4,7 +4,9 @@ import tbs.helper.download as download
 import tbs.logger.log as logger
 import tbs.helper.filedescriptor as fd
 import tbs.kernel.main as kernel
+import tbs.upload.main as upload
 import os
+
 def main(args):
     """
     This is the main function of the repo runner
@@ -75,7 +77,7 @@ def BuildFullRepo():
     buildFonts()
     buildKernel()
     syncRepo()
-    # TODO: perform cloud upload
+    upload.main({"all": True}) # upload everything
 
 def listFonts():
     """
