@@ -19,25 +19,28 @@ def main(args):
         download.downloadRepo("repo")
     logger.log("Build files should be here: {}".format(os.getcwd()))
 
+    if args.all:
+        BuildFullRepo(args.upload)
+        return
+
     if args.packages:
         buildBase(args.upload)
-    elif args.fonts:
+    if args.fonts:
         buildFonts(args.upload)
-    elif args.kernel:
+    if args.kernel:
         buildKernel(args.upload)
-    elif args.sync:
+    if args.sync:
         syncRepo(args.upload)
-    elif args.list:
+    
+    if args.list:
         listAllPackages()
     elif args.list_fonts:
         listFonts()
     elif args.list_packages:
         listPackages()
-    elif args.all:
-        BuildFullRepo(args.upload)
 
 
-def buildBase():
+def buildBase(bUpload=True):
     """
     Build all base packages
     """
@@ -45,8 +48,9 @@ def buildBase():
     if not result.exitcode == 0:
         logger.log("Something went wrong when building packages")
         raise Exception(result.stderr)
+    upload(bUpload)
 
-def buildFonts():
+def buildFonts(bUpload=True):
     """
     Build all fonts
     """
@@ -54,14 +58,16 @@ def buildFonts():
     if not result.exitcode == 0:
         logger.log("Something went wrong when building fonts")
         raise Exception(result.stderr)
+    upload(bUpload)
 
-def buildKernel():
+def buildKernel(bUpload=True):
     """
     Build the tos kernel using auto settings
     """
     kernel.main({"auto": True, "build": True})
+    upload(bUpload)
 
-def syncRepo():
+def syncRepo(bUpload=True):
     """
     Sync the repository packages with the package database
     """
@@ -69,6 +75,7 @@ def syncRepo():
     if not result.exitcode == 0:
         logger.log("Something went wrong when syncing packages to the repo")
         raise Exception(result.stderr)
+    upload(bUpload)
 
 def BuildFullRepo(bUpload=True):
     """
@@ -79,8 +86,11 @@ def BuildFullRepo(bUpload=True):
     buildFonts()
     buildKernel()
     syncRepo()
+    upload(bUpload)
+
+def upload(bUpload=True):
     if bUpload:
-        logger.log("Detected upload option after full build.")
+        logger.log("Detected upload option after build.")
         upload.main({"all": True}) # upload everything
 
 def listFonts():
