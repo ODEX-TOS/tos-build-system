@@ -15,7 +15,7 @@ Below you will find most of what you need if you wish to build tos yourself.
 <br />
 <p align="center">
   <a href="https://github.com/ODEX-TOS/tos-build-system">
-    <img src="https://tos.pbfp.xyz/images/logo.svg" alt="Logo" width="150" height="200">
+    <img src="https://tos.odex.be/images/logo.svg" alt="Logo" width="150" height="200">
   </a>
 
   <h3 align="center">TOS build system</h3>
