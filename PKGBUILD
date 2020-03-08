@@ -1,6 +1,6 @@
 # Maintainer: Tom Meyers tom@odex.be
 pkgname=tos-build-system
-pkgver=r1
+pkgver=r25.8db67b7
 pkgrel=1
 pkgdesc="Build system to easily integrate tos functionality on your system"
 arch=(any)
@@ -27,5 +27,5 @@ build() {
 package() {
         cd "$srcdir/$_reponame"
         python setup.py  install --root="${pkgdir}"
-        install -Dm755 tbs "$pkgdir"/usr/bin/tbs
+        install -Dm755 tbs.sh "$pkgdir"/usr/bin/tbs
 }
