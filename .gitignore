@@ -2,3 +2,4 @@ __pycache__
 pkg
 src
 tos-build-system
+*.pkg.tar.*

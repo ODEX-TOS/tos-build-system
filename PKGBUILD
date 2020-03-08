@@ -1,6 +1,6 @@
 # Maintainer: Tom Meyers tom@odex.be
 pkgname=tos-build-system
-pkgver=r25.8db67b7
+pkgver=r28.e351d77
 pkgrel=1
 pkgdesc="Build system to easily integrate tos functionality on your system"
 arch=(any)
