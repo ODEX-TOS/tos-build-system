@@ -23,7 +23,8 @@ def main(args):
         logger.log("Detected {} cores".format(cores))
     if args.build:
         logger.log("Building the kernel using {} cores".format(cores))
-        buildKernel(cores)
+        # add one to the cores as recommended by make the underlying build system
+        buildKernel(cores +1)
 
 def buildKernel(cores):
     """
